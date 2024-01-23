@@ -50,18 +50,11 @@ public class Main {
         System.out.println(jatekos.getNev()+" "+jatekos.getArany()+" "+jatekos.getNyilak());
 
         char[][] fixpalya = {
-                {'F','F','F','F','F','F','F'},
-                {'F','W','U','U','G','U','F'},
-                {'F','U','U','G','U','U','F'},
-                {'F','W','U','E','U','W','F'},
-                {'F','U','A','U','G','U','F'},
-                {'F','U','U','G','U','U','F'},
-                {'F','F','F','F','F','F','F'},
-
         };
 
+
         Palya palya=new Palya(fixpalya);
-        System.out.println(Arrays.toString(palya.getFipalya()));
+        System.out.println(palya);
 
 
         for (int i = 0; i < fixpalya.length; ++i)

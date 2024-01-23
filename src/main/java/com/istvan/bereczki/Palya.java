@@ -17,15 +17,25 @@ public class Palya {
         };
     }
 
-    public char[][] getFipalya() {
-        return fipalya;
+    public int getArrayLength() {
+        return fipalya.length;
     }
-
+/*
+    public char[][] getFipalya(int i, int j) {
+        return fipalya[i][j];
+    }
+    */
     @Override
     public String toString() {
-        return "Palya{" +
-                "fipalya=" + Arrays.toString(fipalya) +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        for (char[] row : fipalya) {
+            for (char c : row) {
+                sb.append(c).append(" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
     }
 
-}
+
