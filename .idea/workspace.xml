@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1281809d-f6f0-466f-add9-51ae0305db1b" name="Changes" comment="Játékos osztály létrehozás&#10;Pálya osztály">
+    <list default="true" id="1281809d-f6f0-466f-add9-51ae0305db1b" name="Changes" comment="Palya készítő">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/istvan/bereczki/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/istvan/bereczki/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/istvan/bereczki/Palya.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/istvan/bereczki/Palya.java" afterDir="false" />
@@ -113,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706036175642</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Palya készítő">
+      <option name="closed" value="true" />
+      <created>1706041207172</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706041207172</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -162,17 +170,7 @@
     <MESSAGE value="Beadandó feltöltés" />
     <MESSAGE value="check" />
     <MESSAGE value="Játékos osztály létrehozás&#10;Pálya osztály" />
-    <option name="LAST_COMMIT_MESSAGE" value="Játékos osztály létrehozás&#10;Pálya osztály" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/istvan/bereczki/Main.java</url>
-          <line>449</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Palya készítő" />
+    <option name="LAST_COMMIT_MESSAGE" value="Palya készítő" />
   </component>
 </project>
