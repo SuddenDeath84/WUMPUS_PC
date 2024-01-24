@@ -1,82 +1,89 @@
 package com.istvan.bereczki;
+
 import java.util.Scanner;
 
 public class Main {
+    static int heroX = 0;
+    static int heroY = 0;
+
     public static void main(String[] args) {
-        Scanner szov = new Scanner(System.in);
         System.out.println("----------------------------------------------");
         System.out.println("Üdvözöllek a Wumpus játékomban!");
         System.out.println("----------------------------------------------");
 
+        Scanner szov = new Scanner(System.in);
         System.out.println("Add meg a felhasználóneved:");
         String jatekosNev = szov.nextLine();
-        System.out.println("A fehasználóneved: " + jatekosNev);
+        System.out.println("A felhasználóneved: " + jatekosNev);
 
+        // Menü megjelenítése
         System.out.println("Szia " + jatekosNev + "! Kezdődjék a játék:");
         System.out.println("----------------------------------------------");
+        System.out.println("Menü: ");
+        System.out.println("(1) Új játék ");
+        System.out.println("(2) Pályaszerkesztő: ");
+        System.out.println("(3) Pálya betöltése külső állományból: ");
+        System.out.println("(4) Kilépés a menüből: ");
+        System.out.println("----------------------------------------------");
 
-        // Kezdeti értékek arany es nyilak szama
-        int golddb = 0;
-        int nyildb = 2;
-        Player jatekos = new Player(jatekosNev, golddb, nyildb);
-
-        // Pálya létrehozása
+        // Pálya és játékos létrehozása
         Palya palya = new Palya();
-        System.out.println(palya);
+        Player jatekos = new Player(jatekosNev, 0, 5); // Például 0 arannyal és 2 nyíllal
+        char[][] fixpalya = palya.getFipalya();
 
-        int x = 3; // Játékos kezdeti X pozíciója
-        int y = 3; // Játékos kezdeti Y pozíciója
+        // Hős kezdeti helyzetének meghatározása
+        for (int i = 0; i < fixpalya.length; i++) {
+            for (int j = 0; j < fixpalya[i].length; j++) {
+                if (fixpalya[i][j] == 'E') {
+                    heroX = i;
+                    heroY = j;
+                }
+            }
+        }
 
-        String valasz = "Q";
-        boolean vege = false;
-        while (!valasz.equals("0") && !vege) {
-            System.out.println(jatekos.getNev() + " " + jatekos.getArany() + " " + jatekos.getNyilak());
-            System.out.println("Add meg a lépésed (E(előre) H(hátra) J(jobbra) B(balra) L(lővés) vagy nyomd meg a 0 gombot a játék befejezéséhez!):");
+        String valasz = "";
+        while (!"0".equals(valasz)) {
+            System.out.println("Add meg a lépésed! (E(előre) H(hátra) J(jobbra) B(balra) vagy nyomd meg a 0 gombot a játék befejezéséhez!)");
             valasz = szov.nextLine();
 
             switch (valasz) {
-                case "E":
-                    x--;
+                case "e":
+                    moveHero(palya, fixpalya, -1, 0, jatekos);
                     break;
-                case "H":
-                    x++;
+                case "h":
+                    moveHero(palya, fixpalya, 1, 0, jatekos);
                     break;
-                case "J":
-                    y++;
+                case "j":
+                    moveHero(palya, fixpalya, 0, 1, jatekos);
                     break;
-                case "B":
-                    y--;
-                    break;
-                case "0":
+                case "b":
+                    moveHero(palya, fixpalya, 0, -1, jatekos);
                     break;
             }
 
-           if (!valasz.equals("0") && !valasz.equals("Q")) {
-                palya.move2Player(x, y);
-                char aktualisMezo = palya.getFipalya()[x][y];
-                switch (aktualisMezo) {
-                    case 'W':
-                        System.out.println("Megölt a Wumpus! Vége a játéknak.");
-                        vege = true;
-                        break;
-                    case 'G':
-                        System.out.println("Gödörbe estél! Elvesztettél egy nyilat.");
-                        nyildb = Math.max(0, nyildb - 1);
-                        break;
-                    case 'A':
-                        System.out.println("Aranyat találtál!");
-                        golddb++;
-                        break;
-                    case 'U':
-                        System.out.println("Biztonságos terület.");
-                        break;
-                }
-            }
-
-            System.out.println(palya); // Frissített pálya megjelenítése
+            // Pálya újrarajzolása
+            palya.printPalya();
+            System.out.println("Nyilaid száma: " + jatekos.getNyilak());
         }
 
         System.out.println("Kiléptél! A játéknak vége! Játszunk máskor is " + jatekosNev + "!");
-        szov.close();
+    }
+
+    private static void moveHero(Palya palya, char[][] palyaTomb, int dx, int dy, Player jatekos) {
+        int newX = heroX + dx;
+        int newY = heroY + dy;
+
+        String ellenorzes = palya.ellenorizPoziciot(newX, newY, jatekos);
+        if ("OK".equals(ellenorzes)) {
+            palyaTomb[heroX][heroY] = 'U';
+            heroX = newX;
+            heroY = newY;
+            palyaTomb[heroX][heroY] = 'E';
+        } else {
+            System.out.println(ellenorzes);
+            if (ellenorzes.contains("Meghaltál")) {
+                System.exit(0); // Kilép a programból
+            }
+        }
     }
 }

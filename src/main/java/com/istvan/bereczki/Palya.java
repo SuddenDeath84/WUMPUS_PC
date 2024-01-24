@@ -1,7 +1,6 @@
 package com.istvan.bereczki;
 
 public class Palya {
-
     private char[][] fipalya;
 
     public Palya() {
@@ -12,57 +11,33 @@ public class Palya {
                 {'F', 'W', 'U', 'E', 'U', 'W', 'F'},
                 {'F', 'U', 'A', 'U', 'G', 'U', 'F'},
                 {'F', 'U', 'U', 'G', 'U', 'U', 'F'},
-                {'F', 'F', 'F', 'F', 'F', 'F', 'F'},
+                {'F', 'F', 'F', 'F', 'F', 'F', 'F'}
         };
-    }
-
-    public void movePlayer(int newX, int newY) {
-        for (int i = 0; i < fipalya.length; i++) {
-            for (int j = 0; j < fipalya[i].length; j++) {
-                if (fipalya[i][j] == 'E') {
-                    if (newX >= 0 && newX < fipalya.length && newY >= 0 && newY < fipalya[newX].length && fipalya[newX][newY] != 'F') {
-                        fipalya[i][j] = 'U';
-                        fipalya[newX][newY] = 'E';
-                    }
-                    return;
-                }
-            }
-        }
     }
 
     public char[][] getFipalya() {
         return fipalya;
     }
 
-    public void setFipalya(char[][] fipalya) {
-        this.fipalya = fipalya;
-    }
-
-    public void move2Player(int newX, int newY) {
-        // Ellenőrizze, hogy az új pozíció a pályán belül van-e
-        if (newX >= 0 && newX < fipalya.length && newY >= 0 && newY < fipalya[0].length) {
-            for (int i = 0; i < fipalya.length; i++) {
-                for (int j = 0; j < fipalya[i].length; j++) {
-                    if (fipalya[i][j] == 'E') {
-                        fipalya[i][j] = 'U'; // Az előző pozíciót üres területté alakítja
-                        fipalya[newX][newY] = 'E'; // A játékos új pozícióját beállítja
-                        return;
-                    }
-                }
+    public void printPalya() {
+        for (int i = 0; i < fipalya.length; i++) {
+            for (int j = 0; j < fipalya[i].length; j++) {
+                System.out.print(fipalya[i][j] + " | ");
             }
+            System.out.println();
         }
     }
-
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (char[] row : fipalya) {
-            for (char c : row) {
-                sb.append(c).append(" ");
-            }
-            sb.append("\n");
+    public String ellenorizPoziciot(int x, int y, Player jatekos) {
+        if (x < 0 || x >= fipalya.length || y < 0 || y >= fipalya[x].length) {
+            return "Falba ütköztél!";
+        } else if (fipalya[x][y] == 'F') {
+            return "Falba ütköztél!";
+        } else if (fipalya[x][y] == 'W') {
+            return "Meghaltál, a Wumpus megevett!";
+        } else if (fipalya[x][y] == 'G') {
+            jatekos.veszitNyilat();
+            return "Gödörbe estél, egy nyilat vesztettél!";
         }
-        return sb.toString();
+        return "OK";
     }
 }
