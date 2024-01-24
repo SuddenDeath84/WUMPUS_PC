@@ -28,7 +28,7 @@ public class Main {
 
         // Pálya és játékos létrehozása
         Palya palya = new Palya();
-        Player jatekos = new Player(jatekosNev, 0, 5); // Például 0 arannyal és 2 nyíllal
+        Player jatekos = new Player(jatekosNev, 0, 5); // Például 0 arannyal és 5 nyíllal
         char[][] fixpalya = palya.getFipalya();
 
         // Hős kezdeti helyzetének meghatározása
